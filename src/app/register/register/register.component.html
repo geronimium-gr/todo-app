@@ -1,0 +1,11 @@
+<form (ngSubmit)="onSubmit()" class="block">
+  <mat-form-field appearance="fill">
+    <mat-label>Username</mat-label>
+    <input type="text" id="username" name="username" matInput [(ngModel)]="user.username">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Password</mat-label>
+    <input type="password" id="password" name="password" matInput [(ngModel)]="user.password">
+  </mat-form-field>
+  <button type="submit" mat-raised-button color="primary">Register</button>
+</form>
