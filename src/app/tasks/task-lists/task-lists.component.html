@@ -1,8 +1,8 @@
-<app-header [headerTitle]="headerTitle"></app-header>
+<app-header [hasSideNav]="true" [headerTitle]="headerTitle"></app-header>
 
 
 
-<table mat-table [dataSource]="tasks">
+<table mat-table [dataSource]="tasks.length == 0 ? noTasks : tasks">
 
   <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef>#</th>
@@ -38,6 +38,9 @@
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  <tr class="mat-row" *matNoDataRow>
+    <td class="mat-cell" colspan="5">No data here.</td>
+  </tr>
 
 </table>
 

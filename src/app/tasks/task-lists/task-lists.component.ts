@@ -13,14 +13,24 @@ export class TaskListsComponent implements OnInit, OnDestroy {
   headerTitle: string = "Home";
   currentUser!: string;
   tasks: Task[] = [];
+  noTasks: [] = [];
   displayedColumns: string[] = ["id", "title", "description", "user_id", "actions"];
   taskSub!: Subscription
 
   constructor(private taskService: TaskService, private authService: AuthenticationService) { }
 
   ngOnInit(): void {
-    this.taskSub = this.taskService.findAll().subscribe(taskList => {
-      this.tasks = taskList;
+    this.taskSub = this.taskService.findAll()
+      .subscribe({
+        next: (taskList) => {
+          this.tasks = taskList;
+          console.log(taskList);
+
+        },
+        error: (err) => {
+          console.log(err);
+
+        }
     });
 
     this.currentUser = this.authService.currentUser();
