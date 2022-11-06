@@ -1,7 +1,22 @@
-<app-header [hasSideNav]="true" [headerTitle]="headerTitle"></app-header>
+
+<app-header [headerTitle]="'Home'"></app-header>
+
+<mat-card class="example-card">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image" [style]="currentImg"></div>
+    <mat-card-title>{{ currentUser }}</mat-card-title>
+    <mat-card-subtitle>User</mat-card-subtitle>
+  </mat-card-header>
+</mat-card>
 
 
-
+<ng-container>
+  <div class="button-container">
+    <button mat-raised-button color="primary" (click)="addTask()" class="demo-button">
+      Add Task
+    </button>
+  </div>
+</ng-container>
 <table mat-table [dataSource]="tasks.length == 0 ? noTasks : tasks">
 
   <ng-container matColumnDef="id">
@@ -43,6 +58,8 @@
   </tr>
 
 </table>
+
+
 
 
 

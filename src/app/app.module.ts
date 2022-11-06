@@ -11,6 +11,8 @@ import { LoginComponent } from './login/login/login.component';
 import { RegisterComponent } from './register/register/register.component';
 import { MessageComponent } from './components/message/message.component';
 import { HeaderComponent } from './components/header/header.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { TokenInterceptorService } from './services/token-interceptor.service';
 
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatIconModule } from "@angular/material/icon";
@@ -19,9 +21,11 @@ import { MatTabsModule } from "@angular/material/tabs";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input"
 import { FormsModule } from "@angular/forms";
-import { TokenInterceptorService } from './services/token-interceptor.service';
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatTableModule } from "@angular/material/table";
+import { MatSidenavModule } from "@angular/material/sidenav";
+import { MatCardModule } from "@angular/material/card";
+import { MatMenuModule } from "@angular/material/menu";
 
 @NgModule({
   declarations: [
@@ -31,7 +35,8 @@ import { MatTableModule } from "@angular/material/table";
     LoginComponent,
     RegisterComponent,
     MessageComponent,
-    HeaderComponent
+    HeaderComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +51,10 @@ import { MatTableModule } from "@angular/material/table";
     HttpClientModule,
     FormsModule,
     MatDialogModule,
-    MatTableModule
+    MatTableModule,
+    MatSidenavModule,
+    MatCardModule,
+    MatMenuModule
   ],
   providers: [
     {

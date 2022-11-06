@@ -36,19 +36,11 @@ export class AuthenticationService {
   }
 
   isUserLoggedIn() {
-    let user = sessionStorage.getItem("username");
-    let token = this.sessionService.getToken();
+    if (sessionStorage.getItem("token") === null) {
+      return false;
+    }
 
-    return token === null ? false : true;
-
-   // const token = this.sessionService.getToken();
-
-    // if (token !== null) {
-    //   this.helper.isTokenExpired(token)
-    //   return false;
-    // }
-
-    // return false;
+    return this.helper.isTokenExpired(this.sessionService.getToken()) ? false : true;
   }
 
   // checkExpiration() {
@@ -58,11 +50,6 @@ export class AuthenticationService {
 
   //   return parsePayload.exp > Date.now() / 100;
   // }
-
-  currentUser(): string {
-    let user = `${sessionStorage.getItem("username")}`;
-    return user;
-  }
 
   logOut() {
     sessionStorage.removeItem("username");

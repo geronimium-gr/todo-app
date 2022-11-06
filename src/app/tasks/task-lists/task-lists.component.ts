@@ -1,7 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { Subscription } from 'rxjs';
-import { AuthenticationService } from '../../services/authentication.service';
+import { SessionService } from '../../services/session.service';
 import { TaskService } from '../../services/task.service';
+import { AddTaskComponent } from '../add-task/add-task.component';
+import { Task } from '../../model/task';
 
 @Component({
   selector: 'app-task-lists',
@@ -9,15 +13,23 @@ import { TaskService } from '../../services/task.service';
   styleUrls: ['./task-lists.component.scss']
 })
 export class TaskListsComponent implements OnInit, OnDestroy {
+  // @ViewChild('drawer')
+  // drawer!: ElementRef;
 
-  headerTitle: string = "Home";
   currentUser!: string;
+  currentImg!: string;
   tasks: Task[] = [];
   noTasks: [] = [];
   displayedColumns: string[] = ["id", "title", "description", "user_id", "actions"];
-  taskSub!: Subscription
+  taskSub!: Subscription;
 
-  constructor(private taskService: TaskService, private authService: AuthenticationService) { }
+  private helper = new JwtHelperService();
+
+
+  constructor(
+    private taskService: TaskService,
+    private sessionService: SessionService,
+    public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.taskSub = this.taskService.findAll()
@@ -33,8 +45,20 @@ export class TaskListsComponent implements OnInit, OnDestroy {
         }
     });
 
-    this.currentUser = this.authService.currentUser();
+    this.currentUser = this.sessionService.getUsername();
+    this.currentImg = `background-image: url(https://avatars.dicebear.com/api/avataaars/${this.currentUser}.svg);`;
 
+  }
+
+  addTask(): void {
+    const dialogRef = this.dialog.open(AddTaskComponent, {
+      width: "500px"
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      console.log("dialog-close");
+      this.ngOnInit();
+    })
   }
 
   updateTaskDialog(row: Object) {

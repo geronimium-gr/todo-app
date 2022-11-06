@@ -13,7 +13,6 @@ import { AuthenticationService } from '../../services/authentication.service';
 })
 export class LoginComponent implements OnInit, OnDestroy {
 
-  headerTitle: string = "To Do App";
   user!: User;
   loginSub!: Subscription;
 

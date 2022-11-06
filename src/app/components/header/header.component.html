@@ -1,6 +1,17 @@
 <mat-toolbar color="primary">
-  <button *ngIf="hasSideNav" mat-icon-button class="example-icon" aria-label="menu icon">
+  <button *ngIf="hasSideNav" mat-icon-button class="example-icon" [matMenuTriggerFor]="menu" aria-label="menu icon">
     <mat-icon>menu</mat-icon>
   </button>
   <span>{{ headerTitle }}</span>
 </mat-toolbar>
+
+<mat-menu #menu="matMenu">
+  <button mat-menu-item>
+    <mat-icon>person_pin</mat-icon>
+    <span>Welcome User, {{ currentUser }}</span>
+  </button>
+  <button mat-menu-item (click)="onLogout()">
+    <mat-icon>exit_to_app</mat-icon>
+    <span>Logout</span>
+  </button>
+</mat-menu>

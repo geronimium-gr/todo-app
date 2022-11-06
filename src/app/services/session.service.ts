@@ -10,4 +10,8 @@ export class SessionService {
   getToken() : string {
     return `${sessionStorage.getItem("token")}`;
   }
+
+  getUsername() : string {
+    return `${sessionStorage.getItem("username")}`;
+  }
 }

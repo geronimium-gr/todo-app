@@ -1,4 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthenticationService } from '../../services/authentication.service';
+import { SessionService } from '../../services/session.service';
 
 @Component({
   selector: 'app-header',
@@ -8,11 +11,23 @@ import { Component, Input, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
 
   @Input() headerTitle: string = "";
-  @Input() hasSideNav: boolean = false;
+  hasSideNav: boolean = false;
 
-  constructor() { }
+  currentUser!: string;
+
+  constructor(
+    private sessionService: SessionService,
+    private authService: AuthenticationService,
+    private route: Router) { }
 
   ngOnInit(): void {
+    this.currentUser = this.sessionService.getUsername();
+    this.hasSideNav = this.authService.isUserLoggedIn();
   }
 
+  onLogout(): void {
+    this.route.navigate(["/login"]).then(() => {
+      this.authService.logOut();
+    });
+  }
 }

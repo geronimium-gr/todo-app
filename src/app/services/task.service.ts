@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, tap, throwError } from 'rxjs';
 import { apiUrl } from 'src/environments/environment';
+import { Task } from '../model/task';
 
 @Injectable({
   providedIn: 'root'
@@ -20,5 +21,9 @@ export class TaskService {
         return throwError(() => new Error(err));
       })
     )
+  }
+
+  public save(task: Task) {
+    return this.http.post<Task>(apiUrl.taskApi, task);
   }
 }

@@ -12,7 +12,7 @@ export class AuthenticateGuard implements CanActivate {
 
   private helper = new JwtHelperService();
 
-  constructor(private router: Router, private authService: AuthenticationService) {
+  constructor(private router: Router) {
 
   }
 
