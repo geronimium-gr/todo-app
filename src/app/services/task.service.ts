@@ -26,4 +26,8 @@ export class TaskService {
   public save(task: Task) {
     return this.http.post<Task>(apiUrl.taskApi, task);
   }
+
+  public remove(taskId: number) {
+    return this.http.delete<Task>(apiUrl.taskApi + taskId);
+  }
 }

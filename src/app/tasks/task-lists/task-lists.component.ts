@@ -6,6 +6,7 @@ import { SessionService } from '../../services/session.service';
 import { TaskService } from '../../services/task.service';
 import { AddTaskComponent } from '../add-task/add-task.component';
 import { Task } from '../../model/task';
+import { DeleteTasksComponent } from '../delete-tasks/delete-tasks.component';
 
 @Component({
   selector: 'app-task-lists',
@@ -62,6 +63,19 @@ export class TaskListsComponent implements OnInit, OnDestroy {
   }
 
   updateTaskDialog(row: Object) {
+
+  }
+
+  deleteTaskDialog(row: Object) {
+    const dialogRef = this.dialog.open(DeleteTasksComponent, {
+      width: "300px",
+      data: {element: row}
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      console.log("dialog-close");
+      this.ngOnInit();
+    })
 
   }
 

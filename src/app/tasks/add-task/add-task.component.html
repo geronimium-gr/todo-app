@@ -1,18 +1,19 @@
 <h1 mat-dialog-title>Add new task</h1>
-<form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
   <div mat-dialog-content class="block">
     <mat-form-field appearance="fill">
       <mat-label>Title</mat-label>
-      <input id="title" name="title" matInput [(ngModel)]="task.title">
-      <mat-error>Please enter a valid title.</mat-error>
+      <input id="title" name="title" matInput formControlName="title">
+      <mat-error *ngIf="!formGroup.get('title')?.valid && (formGroup.get('title')?.touched || formGroup.get('title')?.dirty)">Please enter a valid title.</mat-error>
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Description</mat-label>
-      <textarea id="description" name="description" matInput [(ngModel)]="task.description"></textarea>
+      <textarea id="description" name="description" matInput formControlName="description"></textarea>
+      <mat-error *ngIf="!formGroup.get('description')?.valid && (formGroup.get('description')?.touched || formGroup.get('description')?.dirty)">Please enter a valid description.</mat-error>
     </mat-form-field>
   </div>
   <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">No Thanks</button>
-    <button *ngIf="" type="submit" mat-button cdkFocusInitial>Ok</button>
+    <button [disabled]="!formGroup.valid" type="submit" mat-button>Ok</button>
   </div>
 </form>

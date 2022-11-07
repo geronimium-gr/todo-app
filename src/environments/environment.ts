@@ -9,7 +9,7 @@ export const environment = {
 export const apiUrl = {
   postLogin: "http://localhost:8080/api/users/login",
   postRegister: "http://localhost:8080/api/users/register",
-  taskApi: "http://localhost:8080/api/tasks"
+  taskApi: "http://localhost:8080/api/tasks/"
 }
 /*
  * For easier debugging in development mode, you can import the following file

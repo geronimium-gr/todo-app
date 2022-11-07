@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { ReactiveFormsModule } from "@angular/forms";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,6 +27,7 @@ import { MatTableModule } from "@angular/material/table";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatCardModule } from "@angular/material/card";
 import { MatMenuModule } from "@angular/material/menu";
+import { DeleteTasksComponent } from './tasks/delete-tasks/delete-tasks.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,8 @@ import { MatMenuModule } from "@angular/material/menu";
     RegisterComponent,
     MessageComponent,
     HeaderComponent,
-    SidebarComponent
+    SidebarComponent,
+    DeleteTasksComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +57,8 @@ import { MatMenuModule } from "@angular/material/menu";
     MatTableModule,
     MatSidenavModule,
     MatCardModule,
-    MatMenuModule
+    MatMenuModule,
+    ReactiveFormsModule
   ],
   providers: [
     {
