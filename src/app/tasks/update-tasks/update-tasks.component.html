@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Add new task</h1>
+<h1 mat-dialog-title>Update task</h1>
 <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
   <div mat-dialog-content class="block">
     <mat-form-field appearance="fill">
@@ -14,6 +14,7 @@
   </div>
   <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">Cancel</button>
-    <button [disabled]="!formGroup.valid" type="submit" mat-button>Add</button>
+    <button [disabled]="!formGroup.valid" type="submit" mat-button>Update</button>
   </div>
 </form>
+

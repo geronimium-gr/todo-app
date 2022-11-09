@@ -7,6 +7,7 @@ import { TaskService } from '../../services/task.service';
 import { AddTaskComponent } from '../add-task/add-task.component';
 import { Task } from '../../model/task';
 import { DeleteTasksComponent } from '../delete-tasks/delete-tasks.component';
+import { UpdateTasksComponent } from '../update-tasks/update-tasks.component';
 
 @Component({
   selector: 'app-task-lists',
@@ -63,7 +64,15 @@ export class TaskListsComponent implements OnInit, OnDestroy {
   }
 
   updateTaskDialog(row: Object) {
+    const dialogRef = this.dialog.open(UpdateTasksComponent, {
+      width: "300px",
+      data: {element: row}
+    });
 
+    dialogRef.afterClosed().subscribe(() => {
+      console.log("dialog-close");
+      this.ngOnInit();
+    });
   }
 
   deleteTaskDialog(row: Object) {
@@ -75,7 +84,7 @@ export class TaskListsComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed().subscribe(() => {
       console.log("dialog-close");
       this.ngOnInit();
-    })
+    });
 
   }
 

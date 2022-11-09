@@ -28,6 +28,7 @@ import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatCardModule } from "@angular/material/card";
 import { MatMenuModule } from "@angular/material/menu";
 import { DeleteTasksComponent } from './tasks/delete-tasks/delete-tasks.component';
+import { UpdateTasksComponent } from './tasks/update-tasks/update-tasks.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { DeleteTasksComponent } from './tasks/delete-tasks/delete-tasks.componen
     MessageComponent,
     HeaderComponent,
     SidebarComponent,
-    DeleteTasksComponent
+    DeleteTasksComponent,
+    UpdateTasksComponent
   ],
   imports: [
     BrowserModule,

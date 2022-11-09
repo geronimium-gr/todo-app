@@ -27,6 +27,10 @@ export class TaskService {
     return this.http.post<Task>(apiUrl.taskApi, task);
   }
 
+  public update(task: Task) {
+    return this.http.put<Task>(apiUrl.taskApi, task);
+  }
+
   public remove(taskId: number) {
     return this.http.delete<Task>(apiUrl.taskApi + taskId);
   }
