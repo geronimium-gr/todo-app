@@ -21,7 +21,6 @@ export class TaskListsComponent implements OnInit, OnDestroy {
   currentUser!: string;
   currentImg!: string;
   tasks: Task[] = [];
-  noTasks: [] = [];
   displayedColumns: string[] = ["id", "title", "description", "user_id", "actions"];
   taskSub!: Subscription;
 
@@ -85,7 +84,13 @@ export class TaskListsComponent implements OnInit, OnDestroy {
       console.log("dialog-close");
       this.ngOnInit();
     });
+  }
 
+  finishTask(row: any) {
+    this.taskService.completeTask(row).subscribe((result) => {
+      console.log(result);
+      this.ngOnInit();
+    })
   }
 
   ngOnDestroy(): void {

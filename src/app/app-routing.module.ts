@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthenticateGuard } from './guards/authenticate.guard';
 import { LoginComponent } from './login/login/login.component';
 import { RegisterComponent } from './register/register/register.component';
+import { FinishedTasksComponent } from './tasks/finished-tasks/finished-tasks.component';
 import { TaskListsComponent } from './tasks/task-lists/task-lists.component';
 
 const routes: Routes = [

@@ -34,4 +34,24 @@ export class TaskService {
   public remove(taskId: number) {
     return this.http.delete<Task>(apiUrl.taskApi + taskId);
   }
+
+  // For Completed Tasks
+
+  public findAllCompletedTasks() : Observable<Task[]>{
+    return this.http.get<Task[]>(apiUrl.completeTaskApi).pipe(
+      tap((data) => {
+        console.log(data);
+      }),
+      catchError((err) => {
+        console.warn(err);
+        return throwError(() => new Error(err));
+      })
+    )
+  }
+
+  public completeTask(task: Task) {
+    return this.http.post<Task>(apiUrl.doneTaskApi, task);
+  }
+
+
 }

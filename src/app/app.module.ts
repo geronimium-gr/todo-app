@@ -13,6 +13,9 @@ import { RegisterComponent } from './register/register/register.component';
 import { MessageComponent } from './components/message/message.component';
 import { HeaderComponent } from './components/header/header.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { DeleteTasksComponent } from './tasks/delete-tasks/delete-tasks.component';
+import { UpdateTasksComponent } from './tasks/update-tasks/update-tasks.component';
+import { FinishedTasksComponent } from './tasks/finished-tasks/finished-tasks.component';
 import { TokenInterceptorService } from './services/token-interceptor.service';
 
 import { MatToolbarModule } from "@angular/material/toolbar";
@@ -27,8 +30,7 @@ import { MatTableModule } from "@angular/material/table";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatCardModule } from "@angular/material/card";
 import { MatMenuModule } from "@angular/material/menu";
-import { DeleteTasksComponent } from './tasks/delete-tasks/delete-tasks.component';
-import { UpdateTasksComponent } from './tasks/update-tasks/update-tasks.component';
+import { MatTooltipModule } from "@angular/material/tooltip";
 
 @NgModule({
   declarations: [
@@ -41,7 +43,8 @@ import { UpdateTasksComponent } from './tasks/update-tasks/update-tasks.componen
     HeaderComponent,
     SidebarComponent,
     DeleteTasksComponent,
-    UpdateTasksComponent
+    UpdateTasksComponent,
+    FinishedTasksComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +63,8 @@ import { UpdateTasksComponent } from './tasks/update-tasks/update-tasks.componen
     MatSidenavModule,
     MatCardModule,
     MatMenuModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatTooltipModule
   ],
   providers: [
     {

@@ -55,7 +55,8 @@ export class UpdateTasksComponent implements OnInit, OnDestroy {
   }
 
   onNoClick(): void {
-    //this.dialogRef.close("User cancelled action");
+    this.formGroup.reset();
+    this.dialogRef.close("User cancelled action");
   }
 
   ngOnDestroy(): void {
