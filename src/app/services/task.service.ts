@@ -38,7 +38,7 @@ export class TaskService {
   // For Completed Tasks
 
   public findAllCompletedTasks() : Observable<Task[]>{
-    return this.http.get<Task[]>(apiUrl.completeTaskApi).pipe(
+    return this.http.get<Task[]>(apiUrl.taskApi + "completed").pipe(
       tap((data) => {
         console.log(data);
       }),
@@ -50,7 +50,11 @@ export class TaskService {
   }
 
   public completeTask(task: Task) {
-    return this.http.post<Task>(apiUrl.doneTaskApi, task);
+    return this.http.post<Task>(apiUrl.taskApi + "complete", task);
+  }
+
+  public redoTask(taskId: number) {
+    return this.http.post<Task>(apiUrl.taskApi + "redo", {id: taskId});
   }
 
 

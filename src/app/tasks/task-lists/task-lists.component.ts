@@ -8,6 +8,7 @@ import { AddTaskComponent } from '../add-task/add-task.component';
 import { Task } from '../../model/task';
 import { DeleteTasksComponent } from '../delete-tasks/delete-tasks.component';
 import { UpdateTasksComponent } from '../update-tasks/update-tasks.component';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 
 @Component({
   selector: 'app-task-lists',
@@ -32,23 +33,33 @@ export class TaskListsComponent implements OnInit, OnDestroy {
     private sessionService: SessionService,
     public dialog: MatDialog) { }
 
+  checkActiveTab(tabChangeEvent: MatTabChangeEvent) {
+    console.log(tabChangeEvent.index);
+    this.checkAllTasks();
+  }
+
   ngOnInit(): void {
-    this.taskSub = this.taskService.findAll()
-      .subscribe({
-        next: (taskList) => {
-          this.tasks = taskList;
-          console.log(taskList);
 
-        },
-        error: (err) => {
-          console.log(err);
-
-        }
-    });
+    this.checkAllTasks();
 
     this.currentUser = this.sessionService.getUsername();
     this.currentImg = `background-image: url(https://avatars.dicebear.com/api/avataaars/${this.currentUser}.svg);`;
 
+  }
+
+  checkAllTasks(): void {
+    this.taskSub = this.taskService.findAll()
+    .subscribe({
+      next: (taskList) => {
+        this.tasks = taskList;
+        console.log(taskList);
+
+      },
+      error: (err) => {
+        console.log(err);
+
+      }
+  });
   }
 
   addTask(): void {
@@ -58,7 +69,7 @@ export class TaskListsComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().subscribe(() => {
       console.log("dialog-close");
-      this.ngOnInit();
+      this.checkAllTasks();
     })
   }
 
@@ -70,7 +81,7 @@ export class TaskListsComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().subscribe(() => {
       console.log("dialog-close");
-      this.ngOnInit();
+      this.checkAllTasks();
     });
   }
 
