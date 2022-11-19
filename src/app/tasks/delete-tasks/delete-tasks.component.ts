@@ -17,15 +17,21 @@ export class DeleteTasksComponent implements OnInit, OnDestroy {
     private taskService: TaskService,
     private dialog: MatDialog,
     public dialogRef: MatDialogRef<DeleteTasksComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: {element : any}) { }
+    @Inject(MAT_DIALOG_DATA) public data: {element : any, component: string}) { }
 
   ngOnInit(): void {
   }
 
   deleteTask() {
-    this.deleteSub = this.taskService.remove(this.data.element.id).subscribe((result) => {
-      console.log(result);
-    });
+    if (this.data.component === "task") {
+      this.deleteSub = this.taskService.remove(this.data.element.id).subscribe((result) => {
+        console.log(result);
+      });
+    } else {
+      this.deleteSub = this.taskService.deleteCompletedTask(this.data.element.id).subscribe((result) => {
+        console.log(result);
+      });
+    }
 
     this.openDialog("Deleted Successfully", "Item deleted.");
   }

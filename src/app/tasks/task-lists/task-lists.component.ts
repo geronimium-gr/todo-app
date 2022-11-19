@@ -57,7 +57,7 @@ export class TaskListsComponent implements OnInit, OnDestroy {
       },
       error: (err) => {
         console.log(err);
-
+        this.tasks = [];
       }
   });
   }
@@ -88,12 +88,12 @@ export class TaskListsComponent implements OnInit, OnDestroy {
   deleteTaskDialog(row: Object) {
     const dialogRef = this.dialog.open(DeleteTasksComponent, {
       width: "300px",
-      data: {element: row}
+      data: {element: row, component: "task"}
     });
 
     dialogRef.afterClosed().subscribe(() => {
       console.log("dialog-close");
-      this.ngOnInit();
+      this.checkAllTasks();
     });
   }
 

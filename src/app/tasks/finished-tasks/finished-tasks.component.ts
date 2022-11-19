@@ -1,8 +1,10 @@
 import { Component, OnDestroy, OnInit, ChangeDetectorRef } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { SessionService } from 'src/app/services/session.service';
 import { TaskService } from 'src/app/services/task.service';
 import { Task } from '../../model/task';
+import { DeleteTasksComponent } from '../delete-tasks/delete-tasks.component';
 
 @Component({
   selector: 'app-finished-tasks',
@@ -19,7 +21,7 @@ export class FinishedTasksComponent implements OnInit, OnDestroy {
   constructor(
     private taskService: TaskService,
     private sessionService: SessionService,
-    private changeDetector: ChangeDetectorRef) { }
+    private dialog: MatDialog) { }
 
   ngOnInit(): void {
     console.log("Oninit");
@@ -36,7 +38,7 @@ export class FinishedTasksComponent implements OnInit, OnDestroy {
       },
       error: (err) => {
         console.log(err);
-
+        this.tasks = [];
       }
     });
   }
@@ -45,12 +47,19 @@ export class FinishedTasksComponent implements OnInit, OnDestroy {
     this.taskFinishedSub = this.taskService.redoTask(row.id).subscribe((result) => {
       console.log(result);
       this.getAllTasks();
-      this.changeDetector.detectChanges();
     });
   }
 
   deleteTaskDialog(row: any) {
+    const dialogRef = this.dialog.open(DeleteTasksComponent, {
+      width: "300px",
+      data: {element: row, component: "doneTask"}
+    });
 
+    dialogRef.afterClosed().subscribe(() => {
+      console.log("dialog-close");
+      this.getAllTasks();
+    });
   }
 
   ngOnDestroy(): void {

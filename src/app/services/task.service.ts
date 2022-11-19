@@ -57,5 +57,9 @@ export class TaskService {
     return this.http.post<Task>(apiUrl.taskApi + "redo", {id: taskId});
   }
 
+  public deleteCompletedTask(taskId: number) {
+    return this.http.delete<Task>(apiUrl.taskApi + "completed/" + taskId)
+  }
+
 
 }
